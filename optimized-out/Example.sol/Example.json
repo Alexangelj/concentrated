@@ -1,0 +1,96 @@
+{
+  "abi": [
+    {
+      "stateMutability": "payable",
+      "type": "receive"
+    }
+  ],
+  "bytecode": {
+    "object": "0x608080604052346013576041908160198239f35b600080fdfe3615600957600080fd5b00fea26469706673582212205045624dfd6a3854d6c1c967a764196614acd126d62c79be271d23435fd872f964736f6c634300080d0033",
+    "sourceMap": "57:54:0:-:0;;;;;;;;;;;;;;;;;",
+    "linkReferences": {}
+  },
+  "deployedBytecode": {
+    "object": "0x3615600957600080fd5b00fea26469706673582212205045624dfd6a3854d6c1c967a764196614acd126d62c79be271d23435fd872f964736f6c634300080d0033",
+    "sourceMap": "57:54:0:-:0;;;;;;;;",
+    "linkReferences": {}
+  },
+  "methodIdentifiers": {},
+  "ast": {
+    "absolutePath": "contracts/Example.sol",
+    "id": 7,
+    "exportedSymbols": {
+      "Example": [
+        6
+      ]
+    },
+    "nodeType": "SourceUnit",
+    "src": "32:80:0",
+    "nodes": [
+      {
+        "id": 1,
+        "nodeType": "PragmaDirective",
+        "src": "32:23:0",
+        "literals": [
+          "solidity",
+          "0.8",
+          ".13"
+        ]
+      },
+      {
+        "id": 6,
+        "nodeType": "ContractDefinition",
+        "src": "57:54:0",
+        "nodes": [
+          {
+            "id": 5,
+            "nodeType": "FunctionDefinition",
+            "src": "80:29:0",
+            "body": {
+              "id": 4,
+              "nodeType": "Block",
+              "src": "107:2:0",
+              "statements": []
+            },
+            "implemented": true,
+            "kind": "receive",
+            "modifiers": [],
+            "name": "",
+            "nameLocation": "-1:-1:-1",
+            "parameters": {
+              "id": 2,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "87:2:0"
+            },
+            "returnParameters": {
+              "id": 3,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "107:0:0"
+            },
+            "scope": 6,
+            "stateMutability": "payable",
+            "virtual": false,
+            "visibility": "external"
+          }
+        ],
+        "abstract": false,
+        "baseContracts": [],
+        "canonicalName": "Example",
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "fullyImplemented": true,
+        "linearizedBaseContracts": [
+          6
+        ],
+        "name": "Example",
+        "nameLocation": "66:7:0",
+        "scope": 7,
+        "usedErrors": []
+      }
+    ],
+    "license": "MIT"
+  },
+  "id": 0
+}
