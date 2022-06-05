@@ -719,47 +719,47 @@
   },
   "ast": {
     "absolutePath": "test/foundry/Examples.t.sol",
-    "id": 21550,
+    "id": 21737,
     "exportedSymbols": {
       "DSTest": [
-        2276
+        2414
       ],
       "Example": [
-        489
+        627
       ],
       "StdStorage": [
-        3463
+        3601
       ],
       "Test": [
-        3365
+        3503
       ],
       "TestExample": [
-        21549
+        21736
       ],
       "Vm": [
-        4943
+        5081
       ],
       "console": [
-        13007
+        13145
       ],
       "console2": [
-        21071
+        21209
       ],
       "stdError": [
-        3435
+        3573
       ],
       "stdMath": [
-        4704
+        4842
       ],
       "stdStorage": [
-        4553
+        4691
       ]
     },
     "nodeType": "SourceUnit",
     "src": "32:447:8",
     "nodes": [
       {
-        "id": 21484,
+        "id": 21671,
         "nodeType": "PragmaDirective",
         "src": "32:23:8",
         "literals": [
@@ -769,36 +769,36 @@
         ]
       },
       {
-        "id": 21485,
+        "id": 21672,
         "nodeType": "ImportDirective",
         "src": "57:28:8",
         "absolutePath": "lib/forge-std/src/Test.sol",
         "file": "forge-std/Test.sol",
         "nameLocation": "-1:-1:-1",
-        "scope": 21550,
-        "sourceUnit": 4705,
+        "scope": 21737,
+        "sourceUnit": 4843,
         "symbolAliases": [],
         "unitAlias": ""
       },
       {
-        "id": 21486,
+        "id": 21673,
         "nodeType": "ImportDirective",
         "src": "87:37:8",
         "absolutePath": "contracts/Example.sol",
         "file": "../../contracts/Example.sol",
         "nameLocation": "-1:-1:-1",
-        "scope": 21550,
-        "sourceUnit": 490,
+        "scope": 21737,
+        "sourceUnit": 628,
         "symbolAliases": [],
         "unitAlias": ""
       },
       {
-        "id": 21549,
+        "id": 21736,
         "nodeType": "ContractDefinition",
         "src": "126:352:8",
         "nodes": [
           {
-            "id": 21491,
+            "id": 21678,
             "nodeType": "VariableDeclaration",
             "src": "161:17:8",
             "constant": false,
@@ -806,57 +806,57 @@
             "mutability": "mutable",
             "name": "ex",
             "nameLocation": "176:2:8",
-            "scope": 21549,
+            "scope": 21736,
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
-              "typeIdentifier": "t_contract$_Example_$489",
+              "typeIdentifier": "t_contract$_Example_$627",
               "typeString": "contract Example"
             },
             "typeName": {
-              "id": 21490,
+              "id": 21677,
               "nodeType": "UserDefinedTypeName",
               "pathNode": {
-                "id": 21489,
+                "id": 21676,
                 "name": "Example",
                 "nodeType": "IdentifierPath",
-                "referencedDeclaration": 489,
+                "referencedDeclaration": 627,
                 "src": "161:7:8"
               },
-              "referencedDeclaration": 489,
+              "referencedDeclaration": 627,
               "src": "161:7:8",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_Example_$489",
+                "typeIdentifier": "t_contract$_Example_$627",
                 "typeString": "contract Example"
               }
             },
             "visibility": "public"
           },
           {
-            "id": 21521,
+            "id": 21708,
             "nodeType": "FunctionDefinition",
             "src": "185:137:8",
             "body": {
-              "id": 21520,
+              "id": 21707,
               "nodeType": "Block",
               "src": "217:105:8",
               "statements": [
                 {
                   "expression": {
-                    "id": 21499,
+                    "id": 21686,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftHandSide": {
-                      "id": 21494,
+                      "id": 21681,
                       "name": "ex",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 21491,
+                      "referencedDeclaration": 21678,
                       "src": "227:2:8",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_contract$_Example_$489",
+                        "typeIdentifier": "t_contract$_Example_$627",
                         "typeString": "contract Example"
                       }
                     },
@@ -866,7 +866,7 @@
                       "arguments": [],
                       "expression": {
                         "argumentTypes": [],
-                        "id": 21497,
+                        "id": 21684,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -874,28 +874,28 @@
                         "nodeType": "NewExpression",
                         "src": "232:11:8",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_function_creation_nonpayable$__$returns$_t_contract$_Example_$489_$",
+                          "typeIdentifier": "t_function_creation_nonpayable$__$returns$_t_contract$_Example_$627_$",
                           "typeString": "function () returns (contract Example)"
                         },
                         "typeName": {
-                          "id": 21496,
+                          "id": 21683,
                           "nodeType": "UserDefinedTypeName",
                           "pathNode": {
-                            "id": 21495,
+                            "id": 21682,
                             "name": "Example",
                             "nodeType": "IdentifierPath",
-                            "referencedDeclaration": 489,
+                            "referencedDeclaration": 627,
                             "src": "236:7:8"
                           },
-                          "referencedDeclaration": 489,
+                          "referencedDeclaration": 627,
                           "src": "236:7:8",
                           "typeDescriptions": {
-                            "typeIdentifier": "t_contract$_Example_$489",
+                            "typeIdentifier": "t_contract$_Example_$627",
                             "typeString": "contract Example"
                           }
                         }
                       },
-                      "id": 21498,
+                      "id": 21685,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": false,
@@ -906,17 +906,17 @@
                       "src": "232:13:8",
                       "tryCall": false,
                       "typeDescriptions": {
-                        "typeIdentifier": "t_contract$_Example_$489",
+                        "typeIdentifier": "t_contract$_Example_$627",
                         "typeString": "contract Example"
                       }
                     },
                     "src": "227:18:8",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_Example_$489",
+                      "typeIdentifier": "t_contract$_Example_$627",
                       "typeString": "contract Example"
                     }
                   },
-                  "id": 21500,
+                  "id": 21687,
                   "nodeType": "ExpressionStatement",
                   "src": "227:18:8"
                 },
@@ -927,7 +927,7 @@
                         "arguments": [
                           {
                             "hexValue": "30",
-                            "id": 21506,
+                            "id": 21693,
                             "isConstant": false,
                             "isLValue": false,
                             "isPure": true,
@@ -949,7 +949,7 @@
                               "typeString": "int_const 0"
                             }
                           ],
-                          "id": 21505,
+                          "id": 21692,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": true,
@@ -961,14 +961,14 @@
                             "typeString": "type(address)"
                           },
                           "typeName": {
-                            "id": 21504,
+                            "id": 21691,
                             "name": "address",
                             "nodeType": "ElementaryTypeName",
                             "src": "264:7:8",
                             "typeDescriptions": {}
                           }
                         },
-                        "id": 21507,
+                        "id": 21694,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": true,
@@ -992,32 +992,32 @@
                         }
                       ],
                       "expression": {
-                        "id": 21501,
+                        "id": 21688,
                         "name": "vm",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 2301,
+                        "referencedDeclaration": 2439,
                         "src": "255:2:8",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_contract$_Vm_$4943",
+                          "typeIdentifier": "t_contract$_Vm_$5081",
                           "typeString": "contract Vm"
                         }
                       },
-                      "id": 21503,
+                      "id": 21690,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": false,
                       "lValueRequested": false,
                       "memberName": "prank",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 4792,
+                      "referencedDeclaration": 4930,
                       "src": "255:8:8",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_external_nonpayable$_t_address_$returns$__$",
                         "typeString": "function (address) external"
                       }
                     },
-                    "id": 21508,
+                    "id": 21695,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -1032,7 +1032,7 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 21509,
+                  "id": 21696,
                   "nodeType": "ExpressionStatement",
                   "src": "255:20:8"
                 },
@@ -1043,7 +1043,7 @@
                         "arguments": [
                           {
                             "hexValue": "30",
-                            "id": 21515,
+                            "id": 21702,
                             "isConstant": false,
                             "isLValue": false,
                             "isPure": true,
@@ -1065,7 +1065,7 @@
                               "typeString": "int_const 0"
                             }
                           ],
-                          "id": 21514,
+                          "id": 21701,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": true,
@@ -1077,14 +1077,14 @@
                             "typeString": "type(address)"
                           },
                           "typeName": {
-                            "id": 21513,
+                            "id": 21700,
                             "name": "address",
                             "nodeType": "ElementaryTypeName",
                             "src": "293:7:8",
                             "typeDescriptions": {}
                           }
                         },
-                        "id": 21516,
+                        "id": 21703,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": true,
@@ -1101,7 +1101,7 @@
                       },
                       {
                         "hexValue": "313030",
-                        "id": 21517,
+                        "id": 21704,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": true,
@@ -1129,32 +1129,32 @@
                         }
                       ],
                       "expression": {
-                        "id": 21510,
+                        "id": 21697,
                         "name": "vm",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 2301,
+                        "referencedDeclaration": 2439,
                         "src": "285:2:8",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_contract$_Vm_$4943",
+                          "typeIdentifier": "t_contract$_Vm_$5081",
                           "typeString": "contract Vm"
                         }
                       },
-                      "id": 21512,
+                      "id": 21699,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": false,
                       "lValueRequested": false,
                       "memberName": "deal",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 4821,
+                      "referencedDeclaration": 4959,
                       "src": "285:7:8",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_external_nonpayable$_t_address_$_t_uint256_$returns$__$",
                         "typeString": "function (address,uint256) external"
                       }
                     },
-                    "id": 21518,
+                    "id": 21705,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -1169,7 +1169,7 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 21519,
+                  "id": 21706,
                   "nodeType": "ExpressionStatement",
                   "src": "285:30:8"
                 }
@@ -1182,28 +1182,28 @@
             "name": "setUp",
             "nameLocation": "194:5:8",
             "parameters": {
-              "id": 21492,
+              "id": 21679,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "199:2:8"
             },
             "returnParameters": {
-              "id": 21493,
+              "id": 21680,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "217:0:8"
             },
-            "scope": 21549,
+            "scope": 21736,
             "stateMutability": "payable",
             "virtual": false,
             "visibility": "public"
           },
           {
-            "id": 21548,
+            "id": 21735,
             "nodeType": "FunctionDefinition",
             "src": "328:148:8",
             "body": {
-              "id": 21547,
+              "id": 21734,
               "nodeType": "Block",
               "src": "366:110:8",
               "statements": [
@@ -1212,7 +1212,7 @@
                     "arguments": [
                       {
                         "hexValue": "",
-                        "id": 21534,
+                        "id": 21721,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": true,
@@ -1246,14 +1246,14 @@
                             {
                               "arguments": [
                                 {
-                                  "id": 21528,
+                                  "id": 21715,
                                   "name": "ex",
                                   "nodeType": "Identifier",
                                   "overloadedDeclarations": [],
-                                  "referencedDeclaration": 21491,
+                                  "referencedDeclaration": 21678,
                                   "src": "392:2:8",
                                   "typeDescriptions": {
-                                    "typeIdentifier": "t_contract$_Example_$489",
+                                    "typeIdentifier": "t_contract$_Example_$627",
                                     "typeString": "contract Example"
                                   }
                                 }
@@ -1261,11 +1261,11 @@
                               "expression": {
                                 "argumentTypes": [
                                   {
-                                    "typeIdentifier": "t_contract$_Example_$489",
+                                    "typeIdentifier": "t_contract$_Example_$627",
                                     "typeString": "contract Example"
                                   }
                                 ],
-                                "id": 21527,
+                                "id": 21714,
                                 "isConstant": false,
                                 "isLValue": false,
                                 "isPure": true,
@@ -1277,7 +1277,7 @@
                                   "typeString": "type(address payable)"
                                 },
                                 "typeName": {
-                                  "id": 21526,
+                                  "id": 21713,
                                   "name": "address",
                                   "nodeType": "ElementaryTypeName",
                                   "src": "384:8:8",
@@ -1285,7 +1285,7 @@
                                   "typeDescriptions": {}
                                 }
                               },
-                              "id": 21529,
+                              "id": 21716,
                               "isConstant": false,
                               "isLValue": false,
                               "isPure": false,
@@ -1308,7 +1308,7 @@
                                 "typeString": "address payable"
                               }
                             ],
-                            "id": 21525,
+                            "id": 21712,
                             "isConstant": false,
                             "isLValue": false,
                             "isPure": true,
@@ -1320,14 +1320,14 @@
                               "typeString": "type(address)"
                             },
                             "typeName": {
-                              "id": 21524,
+                              "id": 21711,
                               "name": "address",
                               "nodeType": "ElementaryTypeName",
                               "src": "376:7:8",
                               "typeDescriptions": {}
                             }
                           },
-                          "id": 21530,
+                          "id": 21717,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": false,
@@ -1342,7 +1342,7 @@
                             "typeString": "address"
                           }
                         },
-                        "id": 21531,
+                        "id": 21718,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -1355,7 +1355,7 @@
                           "typeString": "function (bytes memory) payable returns (bool,bytes memory)"
                         }
                       },
-                      "id": 21533,
+                      "id": 21720,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": false,
@@ -1367,7 +1367,7 @@
                       "options": [
                         {
                           "hexValue": "31",
-                          "id": 21532,
+                          "id": 21719,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": true,
@@ -1389,7 +1389,7 @@
                         "typeString": "function (bytes memory) payable returns (bool,bytes memory)"
                       }
                     },
-                    "id": 21535,
+                    "id": 21722,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -1404,7 +1404,7 @@
                       "typeString": "tuple(bool,bytes memory)"
                     }
                   },
-                  "id": 21536,
+                  "id": 21723,
                   "nodeType": "ExpressionStatement",
                   "src": "376:45:8"
                 },
@@ -1416,7 +1416,7 @@
                           "typeIdentifier": "t_uint256",
                           "typeString": "uint256"
                         },
-                        "id": 21544,
+                        "id": 21731,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -1425,14 +1425,14 @@
                           "expression": {
                             "arguments": [
                               {
-                                "id": 21540,
+                                "id": 21727,
                                 "name": "ex",
                                 "nodeType": "Identifier",
                                 "overloadedDeclarations": [],
-                                "referencedDeclaration": 21491,
+                                "referencedDeclaration": 21678,
                                 "src": "446:2:8",
                                 "typeDescriptions": {
-                                  "typeIdentifier": "t_contract$_Example_$489",
+                                  "typeIdentifier": "t_contract$_Example_$627",
                                   "typeString": "contract Example"
                                 }
                               }
@@ -1440,11 +1440,11 @@
                             "expression": {
                               "argumentTypes": [
                                 {
-                                  "typeIdentifier": "t_contract$_Example_$489",
+                                  "typeIdentifier": "t_contract$_Example_$627",
                                   "typeString": "contract Example"
                                 }
                               ],
-                              "id": 21539,
+                              "id": 21726,
                               "isConstant": false,
                               "isLValue": false,
                               "isPure": true,
@@ -1456,14 +1456,14 @@
                                 "typeString": "type(address)"
                               },
                               "typeName": {
-                                "id": 21538,
+                                "id": 21725,
                                 "name": "address",
                                 "nodeType": "ElementaryTypeName",
                                 "src": "438:7:8",
                                 "typeDescriptions": {}
                               }
                             },
-                            "id": 21541,
+                            "id": 21728,
                             "isConstant": false,
                             "isLValue": false,
                             "isPure": false,
@@ -1478,7 +1478,7 @@
                               "typeString": "address"
                             }
                           },
-                          "id": 21542,
+                          "id": 21729,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": false,
@@ -1495,7 +1495,7 @@
                         "operator": "==",
                         "rightExpression": {
                           "hexValue": "31",
-                          "id": 21543,
+                          "id": 21730,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": true,
@@ -1524,7 +1524,7 @@
                           "typeString": "bool"
                         }
                       ],
-                      "id": 21537,
+                      "id": 21724,
                       "name": "assert",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
@@ -1535,7 +1535,7 @@
                         "typeString": "function (bool) pure"
                       }
                     },
-                    "id": 21545,
+                    "id": 21732,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -1550,7 +1550,7 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 21546,
+                  "id": 21733,
                   "nodeType": "ExpressionStatement",
                   "src": "431:38:8"
                 }
@@ -1563,18 +1563,18 @@
             "name": "testReceive",
             "nameLocation": "337:11:8",
             "parameters": {
-              "id": 21522,
+              "id": 21709,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "348:2:8"
             },
             "returnParameters": {
-              "id": 21523,
+              "id": 21710,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "366:0:8"
             },
-            "scope": 21549,
+            "scope": 21736,
             "stateMutability": "payable",
             "virtual": false,
             "visibility": "public"
@@ -1584,31 +1584,31 @@
         "baseContracts": [
           {
             "baseName": {
-              "id": 21487,
+              "id": 21674,
               "name": "Test",
               "nodeType": "IdentifierPath",
-              "referencedDeclaration": 3365,
+              "referencedDeclaration": 3503,
               "src": "150:4:8"
             },
-            "id": 21488,
+            "id": 21675,
             "nodeType": "InheritanceSpecifier",
             "src": "150:4:8"
           }
         ],
         "canonicalName": "TestExample",
         "contractDependencies": [
-          489
+          627
         ],
         "contractKind": "contract",
         "fullyImplemented": true,
         "linearizedBaseContracts": [
-          21549,
-          3365,
-          2276
+          21736,
+          3503,
+          2414
         ],
         "name": "TestExample",
         "nameLocation": "135:11:8",
-        "scope": 21550,
+        "scope": 21737,
         "usedErrors": []
       }
     ],

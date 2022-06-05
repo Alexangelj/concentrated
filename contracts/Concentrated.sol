@@ -55,7 +55,8 @@ contract Concentrated is Context {
         returns (
             uint256 price,
             uint256 amountIn,
-            uint256 amountOut
+            uint256 amountOut,
+            uint256 remainder
         )
     {
         // --- Compute the Swap --- //
@@ -67,15 +68,15 @@ contract Concentrated is Context {
         uint256 liquidity = getLiquidityAtSqrtPrice(currentSqrtPrice);
 
         // Get the next price.
-        uint256 nextPrice = getNextSqrtPrice(currentIndex);
+        uint256 nextSqrtPrice = getNextSqrtPrice(currentIndex);
 
         console.log("Calling getSwapAmounts with: ");
-        console.log(currentSqrtPrice);
-        console.log(liquidity);
-        console.log(nextPrice);
+        console.log("current sqrtPrice", currentSqrtPrice);
+        console.log("liquidity", liquidity);
+        console.log("next sqrtPrice", nextSqrtPrice);
 
         // Get the actual swap amounts.
-        (price, amountIn, amountOut) = getSwapAmounts(amount, currentSqrtPrice, nextPrice, liquidity);
+        (price, amountIn, amountOut, remainder) = getSwapAmounts(amount, currentSqrtPrice, nextSqrtPrice, liquidity);
 
         // --- Do the swap --- //
 
@@ -83,9 +84,17 @@ contract Concentrated is Context {
         _setSqrtPrice(price);
 
         // Update the balances.
+        if (balanceOf[msg.sender][token0] < amountIn) revert BalanceError(balanceOf[msg.sender][token0], amountIn); // for debugging
+
+        // User pays and receives the tokens swapped.
         balanceOf[msg.sender][token0] -= amountIn;
         balanceOf[msg.sender][token1] += amountOut;
+        // This contract also pays and receives the tokens swapped.
+        balanceOf[address(this)][token0] += amountIn;
+        balanceOf[address(this)][token1] -= amountOut;
     }
+
+    error BalanceError(uint256 bal, uint256 less);
 
     error SetPriceError();
 
@@ -120,17 +129,17 @@ contract Concentrated is Context {
     }
 
     /// @dev Lookup next higher price given a price.
-    function getNextSqrtPrice(uint256 index) public view returns (uint256 nextPrice) {
-        nextPrice = sqrtGrid[index + 1];
+    function getNextSqrtPrice(uint256 index) public view returns (uint256 nextSqrtPrice) {
+        nextSqrtPrice = sqrtGrid[index + 1];
     }
 
     /// @dev Uses the change in the price and the liquidity to derive amounts to swap.
-    /// @notice (amountIn, amountOut) = f(nextPrice - currentSqrtPrice, liquidity)
+    /// @notice (amountIn, amountOut) = f(nextSqrtPrice - currentSqrtPrice, liquidity)
     /// Swapping X in will change the price. Then the change in price will change the Y.
     function getSwapAmounts(
         uint256 swapAmount,
         uint256 currentSqrtPrice,
-        uint256 nextPrice,
+        uint256 nextSqrtPrice,
         uint256 liquidity
     )
         public
@@ -138,17 +147,26 @@ contract Concentrated is Context {
         returns (
             uint256 price,
             uint256 amountIn,
-            uint256 amountOut
+            uint256 amountOut,
+            uint256 remainder
         )
     {
-        amountIn = swapAmount;
+        // Get full change in the sqrt price by swapping `swapAmount` of x in.
+        uint256 fullDeltaSqrtPrice = getChangeInPriceGivenX(swapAmount, liquidity);
 
-        uint256 deltaSqrtPrice = getChangeInPriceGivenX(amountIn, liquidity);
+        // Get the maximum delta in the sqrt price, which is difference between the neighboring ticks.
+        uint256 deltaSqrtPrice = nextSqrtPrice - currentSqrtPrice;
 
-        amountOut = getChangeInYGivenChangeInPrice(deltaSqrtPrice, liquidity);
+        // If the full price change is more than the tick price change, next price is the next sqrt price.
+        uint256 normalizedDeltaSqrtPrice = deltaSqrtPrice * 1e18;
+        console.log(fullDeltaSqrtPrice, normalizedDeltaSqrtPrice);
+        if (fullDeltaSqrtPrice < normalizedDeltaSqrtPrice) price = nextSqrtPrice;
+        // Compute amounts that changed given the change in sqrt price and amount of liquidity.
+        (amountIn, amountOut) = getAmountsGivenSqrtPriceAndLiquidity(deltaSqrtPrice, liquidity);
 
-        if (deltaSqrtPrice > (nextPrice - currentSqrtPrice)) price = nextPrice;
-        else price = currentSqrtPrice;
+        // If price is equal to next sqrt price, then set the remainder to be less the amountIn
+        if (price == nextSqrtPrice) remainder = swapAmount - amountIn;
+        else price = currentSqrtPrice; // Else we stay within this price tick, and remainder stays at 0.
     }
 
     /// @dev Δx= Δ(1/sqrt(Price)) * L
@@ -160,43 +178,39 @@ contract Concentrated is Context {
         deltaSqrtPrice = (liquidity * 1e18) / deltaX; // Unit Math: 1e18 = 1e18 * 1e18 / 1e18
     }
 
-    /// @dev Δy = Δ(sqrt(Price)) * L
-    function getChangeInYGivenChangeInPrice(uint256 deltaSqrtPrice, uint256 liquidity)
+    /// @dev Computes actual virtual reserves in state.
+    function getReserves(uint256 sqrtPriceIndex) public view returns (uint256 reserve0, uint256 reserve1) {
+        uint256 sqrtPrice = sqrtGrid[sqrtPriceIndex];
+        uint256 liquidity = ticks[sqrtPrice];
+        (reserve0, reserve1) = getAmountsGivenSqrtPriceAndLiquidity(sqrtPrice, liquidity);
+    }
+
+    /// @dev Computes theoretical virtual reserves given sqrt price and liquidity.
+    ///      Handles computing deltas or values! So change in x or x given some change in sqrt price or sqrt price.
+    ///      Δx = L * Δ(1/sqrt(Price))
+    ///      Δy = L * Δ(sqrt(Price))
+    function getAmountsGivenSqrtPriceAndLiquidity(uint256 sqrtPrice, uint256 liquidity)
         public
         view
-        returns (uint256 deltaY)
+        returns (uint256 amount0, uint256 amount1)
     {
-        deltaY = (deltaSqrtPrice * liquidity) / 1e18; // Unit Math: 1e18 = 1e18 * 1e18 / 1e18
+        uint256 normalizedSqrtPrice = sqrtPrice * SCALAR;
+        amount0 = (liquidity * SCALAR) / normalizedSqrtPrice;
+        amount1 = (liquidity * normalizedSqrtPrice) / SCALAR;
     }
 
     // --- To Do --- //
 
     /// @dev L = sqrt(xy) = sqrt(k)
     /// Price = y / x
-    /// y = Price * x
-    /// x = y / Price
     /// L = sqrt(y / Price * y)
     /// L = sqrt(y^2 / Price) = y / sqrt(Price)
-    /// y = L * sqrt(Price)
     /// L = sqrt(x * P * x)
     /// L = sqrt(x^2 * P)
     /// L = sqrt(x^2) * sqrt(P)
     /// L = x * sqrt(Price)
-    /// liquidity = x * sqrtPrice
-    /// x = liquidity / sqrtPrice
-    /// x = sqrt(xy) / sqrt(y/x)
-    /// x = sqrt(xy / y /x) = sqrt(xxy/y) = sqrt(x^2) = x
-    /// xy = k
-    /// L = sqrt(xy)
-    /// L^2 = xy
-    /// x = L^2 / y
-    /// y = x / L^2
-    /// y = x / sqrt(xy)^2 = x / xy = 1 / y
-    /// y = L / sqrt(Price) / L^2
-    /// y = L / sqrt(y / x) / L^2
-    /// y = L^3 / sqrt(y / x)
-    /// sqrt(y / x) = L^3 / y
-    /// y / x =
+    /// x = L / sqrt(Price) <------- Use this to compute amount0
+    /// y = L * sqrt(Price) <------- Use this to compute amount1
     /// liquidity = L = liquidity we want to mint
     function allocate(
         address to,
@@ -204,14 +218,16 @@ contract Concentrated is Context {
         uint256 sqrtPrice
     ) public returns (uint256 amount0, uint256 amount1) {
         // Compute token amounts required to mint liquidity at price.
-        amount0 = (liquidity * 1e18) / sqrtPrice; // sqrtPrice = 1e18 units
-        amount1 = (liquidity * sqrtPrice) / 1e18; // 1e18 * 1e18 / 1e18 = 1e18
-        // Set Liquidity at SqrtPrice.
-        uint256 normalizedSqrtPrice = sqrtPrice / SCALAR;
-        ticks[normalizedSqrtPrice] = liquidity;
-        // Handle tokens and minting liquidity.
-        balanceOf[to][token0] -= amount0;
-        balanceOf[to][token1] -= amount1;
+        (amount0, amount1) = getAmountsGivenSqrtPriceAndLiquidity(sqrtPrice, liquidity);
+        // Add Liquidity at SqrtPrice.
+        ticks[sqrtPrice] += liquidity;
+        // Tokens are taken from user
+        balanceOf[msg.sender][token0] -= amount0;
+        balanceOf[msg.sender][token1] -= amount1;
+        // Tokens go in this contract
+        balanceOf[address(this)][token0] += amount0;
+        balanceOf[address(this)][token1] += amount1;
+        // This contract is a liquidity token, give liquidity to `to`.
         balanceOf[to][address(this)] += liquidity;
 
         emit Allocate(to, sqrtPrice, liquidity);

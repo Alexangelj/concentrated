@@ -43,18 +43,16 @@ contract TestConcentrated is Test {
         uint256 balance0 = concentrate.balanceOf(user, token0);
         uint256 balance1 = concentrate.balanceOf(user, token1);
         uint256 liquidity0 = concentrate.balanceOf(user, address(concentrate));
+        uint256 sqrtPrice = concentrate.sqrtGrid(sqrtPriceIndex); // indexed at 0, so 1 = second element.
 
         vm.prank(user);
         uint256 liquidity = 10; // 10 = sqrt(xy), 100 = xy, x = 10 / sqrtPrice, x = 5, 100 = 5y, y = 20, y = x / 10^2, y = x / 100
-        uint256 sqrtPrice = concentrate.sqrtGrid(sqrtPriceIndex) * SCALAR; // indexed at 0, so 1 = second element.
         (amount0, amount1) = concentrate.allocate(user, liquidity, sqrtPrice);
-
-        uint256 normalizedSqrtPrice = sqrtPrice / SCALAR;
 
         assertEq(concentrate.balanceOf(user, address(concentrate)), liquidity0 + liquidity);
         assertEq(concentrate.balanceOf(user, token0), balance0 - amount0);
         assertEq(concentrate.balanceOf(user, token1), balance1 - amount1);
-        assertEq(concentrate.ticks(normalizedSqrtPrice), liquidity);
+        assertEq(concentrate.ticks(sqrtPrice), liquidity);
         assertEq(amount0 * amount1, liquidity * liquidity);
     }
 
@@ -65,37 +63,43 @@ contract TestConcentrated is Test {
         console.log(amount1);
     }
 
-    function testChangeInPriceGivenX() public {
-        uint256 currentIndex = concentrate.currentIndex();
-        allocate(currentIndex);
-
-        uint256 deltaX = 10;
-        uint256 liquidity = concentrate.ticks(concentrate.sqrtGrid(currentIndex));
-        uint256 deltaSqrtPrice = concentrate.getChangeInPriceGivenX(deltaX, liquidity);
-        console.log(deltaSqrtPrice);
-
-        assertGt(deltaSqrtPrice, 0);
-
-        uint256 deltaY = concentrate.getChangeInYGivenChangeInPrice(deltaSqrtPrice, liquidity);
-        console.log(deltaY);
+    function getReserves(uint256 priceIndex) public view returns (uint256 reserve0, uint256 reserve1) {
+        (reserve0, reserve1) = concentrate.getReserves(priceIndex);
+        console.log("Getting Reserves for price index", priceIndex);
+        console.log("reserve0", reserve0);
+        console.log("reserve1", reserve1);
+        console.log("Price:", reserve1 / reserve0);
     }
 
     function testSwap() public {
         // Add liquidity to tick index 1.
         uint256 currentIndex = concentrate.currentIndex();
-        allocate(currentIndex);
-        allocate(currentIndex + 1);
+        allocate(currentIndex); // Index0
+        allocate(currentIndex + 1); // Index1
+
+        (uint256 reserve0Index0, uint256 reserve1Index0) = getReserves(currentIndex);
+        (uint256 reserve0Index1, uint256 reserve1Index1) = getReserves(currentIndex + 1);
+
+        uint256 priceBefore = concentrate.getCurrentSqrtPrice();
 
         // Do the swap
         vm.prank(user);
-        uint256 amount = 10;
+        uint256 amount = 9;
         uint256 limitPrice = 0;
-        (uint256 price, uint256 amountIn, uint256 amountOut) = concentrate.swap(amount, limitPrice);
+        (uint256 price, uint256 amountIn, uint256 amountOut, uint256 remainder) = concentrate.swap(amount, limitPrice);
         console.log("Swapped!");
-        console.log(price);
-        console.log(amountIn);
-        console.log(amountOut);
+        console.log("price", price);
+        console.log("amountIn", amountIn);
+        console.log("amountOut", amountOut);
+        console.log("remainder", remainder);
+
+        uint256 expectedRemainder = reserve0Index0 > amount ? 0 : amount - reserve0Index0;
+
+        bool expectedPriceChange = expectedRemainder > 0;
+        bool actualPriceChange = priceBefore != price;
 
         assertGt(concentrate.balanceOf(user, token1), 0);
+        assertEq(remainder, expectedRemainder);
+        assertEq(actualPriceChange, expectedPriceChange);
     }
 }

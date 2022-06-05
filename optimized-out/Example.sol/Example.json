@@ -18,17 +18,17 @@
   "methodIdentifiers": {},
   "ast": {
     "absolutePath": "contracts/Example.sol",
-    "id": 490,
+    "id": 628,
     "exportedSymbols": {
       "Example": [
-        489
+        627
       ]
     },
     "nodeType": "SourceUnit",
     "src": "32:80:1",
     "nodes": [
       {
-        "id": 484,
+        "id": 622,
         "nodeType": "PragmaDirective",
         "src": "32:23:1",
         "literals": [
@@ -38,16 +38,16 @@
         ]
       },
       {
-        "id": 489,
+        "id": 627,
         "nodeType": "ContractDefinition",
         "src": "57:54:1",
         "nodes": [
           {
-            "id": 488,
+            "id": 626,
             "nodeType": "FunctionDefinition",
             "src": "80:29:1",
             "body": {
-              "id": 487,
+              "id": 625,
               "nodeType": "Block",
               "src": "107:2:1",
               "statements": []
@@ -58,18 +58,18 @@
             "name": "",
             "nameLocation": "-1:-1:-1",
             "parameters": {
-              "id": 485,
+              "id": 623,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "87:2:1"
             },
             "returnParameters": {
-              "id": 486,
+              "id": 624,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "107:0:1"
             },
-            "scope": 489,
+            "scope": 627,
             "stateMutability": "payable",
             "virtual": false,
             "visibility": "external"
@@ -82,11 +82,11 @@
         "contractKind": "contract",
         "fullyImplemented": true,
         "linearizedBaseContracts": [
-          489
+          627
         ],
         "name": "Example",
         "nameLocation": "66:7:1",
-        "scope": 490,
+        "scope": 628,
         "usedErrors": []
       }
     ],
