@@ -7,30 +7,30 @@
   ],
   "bytecode": {
     "object": "0x608080604052346013576041908160198239f35b600080fdfe3615600957600080fd5b00fea26469706673582212205045624dfd6a3854d6c1c967a764196614acd126d62c79be271d23435fd872f964736f6c634300080d0033",
-    "sourceMap": "57:54:0:-:0;;;;;;;;;;;;;;;;;",
+    "sourceMap": "57:54:1:-:0;;;;;;;;;;;;;;;;;",
     "linkReferences": {}
   },
   "deployedBytecode": {
     "object": "0x3615600957600080fd5b00fea26469706673582212205045624dfd6a3854d6c1c967a764196614acd126d62c79be271d23435fd872f964736f6c634300080d0033",
-    "sourceMap": "57:54:0:-:0;;;;;;;;",
+    "sourceMap": "57:54:1:-:0;;;;;;;;",
     "linkReferences": {}
   },
   "methodIdentifiers": {},
   "ast": {
     "absolutePath": "contracts/Example.sol",
-    "id": 7,
+    "id": 490,
     "exportedSymbols": {
       "Example": [
-        6
+        489
       ]
     },
     "nodeType": "SourceUnit",
-    "src": "32:80:0",
+    "src": "32:80:1",
     "nodes": [
       {
-        "id": 1,
+        "id": 484,
         "nodeType": "PragmaDirective",
-        "src": "32:23:0",
+        "src": "32:23:1",
         "literals": [
           "solidity",
           "0.8",
@@ -38,18 +38,18 @@
         ]
       },
       {
-        "id": 6,
+        "id": 489,
         "nodeType": "ContractDefinition",
-        "src": "57:54:0",
+        "src": "57:54:1",
         "nodes": [
           {
-            "id": 5,
+            "id": 488,
             "nodeType": "FunctionDefinition",
-            "src": "80:29:0",
+            "src": "80:29:1",
             "body": {
-              "id": 4,
+              "id": 487,
               "nodeType": "Block",
-              "src": "107:2:0",
+              "src": "107:2:1",
               "statements": []
             },
             "implemented": true,
@@ -58,18 +58,18 @@
             "name": "",
             "nameLocation": "-1:-1:-1",
             "parameters": {
-              "id": 2,
+              "id": 485,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "87:2:0"
+              "src": "87:2:1"
             },
             "returnParameters": {
-              "id": 3,
+              "id": 486,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "107:0:0"
+              "src": "107:0:1"
             },
-            "scope": 6,
+            "scope": 489,
             "stateMutability": "payable",
             "virtual": false,
             "visibility": "external"
@@ -82,15 +82,15 @@
         "contractKind": "contract",
         "fullyImplemented": true,
         "linearizedBaseContracts": [
-          6
+          489
         ],
         "name": "Example",
-        "nameLocation": "66:7:0",
-        "scope": 7,
+        "nameLocation": "66:7:1",
+        "scope": 490,
         "usedErrors": []
       }
     ],
     "license": "MIT"
   },
-  "id": 0
+  "id": 1
 }
