@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.13;
 
-import "forge-std/Test.sol";
+import "hardhat/console.sol";
 
 /// @dev Used for testing!
 contract Context {
@@ -19,11 +19,11 @@ contract Context {
     }
 
     function setBalance(
-        address user,
+        address to,
         address token,
         uint256 amount
     ) public {
-        balanceOf[user][token] = amount;
+        balanceOf[to][token] = amount;
     }
 }
 
@@ -92,6 +92,9 @@ contract Concentrated is Context {
         // This contract also pays and receives the tokens swapped.
         balanceOf[address(this)][token0] += amountIn;
         balanceOf[address(this)][token1] -= amountOut;
+
+        // Todo: Use limit price.
+        limitPrice;
     }
 
     error BalanceError(uint256 bal, uint256 less);
@@ -174,7 +177,7 @@ contract Concentrated is Context {
     ///      Δx / L = 1 / (√P_1 - √P_0)
     ///      (√P_1 - √P_0) = L / Δx
     ///      ΔP = L / Δx
-    function getChangeInPriceGivenX(uint256 deltaX, uint256 liquidity) public view returns (uint256 deltaSqrtPrice) {
+    function getChangeInPriceGivenX(uint256 deltaX, uint256 liquidity) public pure returns (uint256 deltaSqrtPrice) {
         deltaSqrtPrice = (liquidity * 1e18) / deltaX; // Unit Math: 1e18 = 1e18 * 1e18 / 1e18
     }
 
@@ -191,7 +194,7 @@ contract Concentrated is Context {
     ///      Δy = L * Δ(sqrt(Price))
     function getAmountsGivenSqrtPriceAndLiquidity(uint256 sqrtPrice, uint256 liquidity)
         public
-        view
+        pure
         returns (uint256 amount0, uint256 amount1)
     {
         uint256 normalizedSqrtPrice = sqrtPrice * SCALAR;

@@ -3,7 +3,7 @@ pragma solidity 0.8.13;
 
 import "forge-std/Test.sol";
 
-import "../../contracts/Concentrated.sol";
+import {Concentrated} from "../../contracts/Concentrated.sol";
 
 contract TestConcentrated is Test {
     Concentrated public concentrate;
@@ -79,6 +79,11 @@ contract TestConcentrated is Test {
 
         (uint256 reserve0Index0, uint256 reserve1Index0) = getReserves(currentIndex);
         (uint256 reserve0Index1, uint256 reserve1Index1) = getReserves(currentIndex + 1);
+
+        // Todo: use reserve indexes.
+        reserve1Index0;
+        reserve0Index1;
+        reserve1Index1;
 
         uint256 priceBefore = concentrate.getCurrentSqrtPrice();
 

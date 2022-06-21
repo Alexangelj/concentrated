@@ -2,6 +2,9 @@
 
 What's a concentrated AMM? Well, it means liquidity at prices. Those prices are derived from the tokens in the reserves.
 
+Run the swap test with:
+`yarn test:forge`
+
 ## Spec
 
 ### Allocate

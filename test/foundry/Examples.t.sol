@@ -15,7 +15,8 @@ contract TestExample is Test {
     }
 
     function testReceive() public payable {
-        address(payable(ex)).call{value: 1 ether}("");
+        (bool success, ) = address(payable(ex)).call{value: 1 ether}("");
         assert(address(ex).balance == 1 ether);
+        assert(success);
     }
 }
